@@ -22,7 +22,7 @@ def maxSubarray(arr):
     # Find max subsequence
     # Generate list of all nonzero length subsequences (defined as subsets)
 
-    def getSubs(l):
+    def getSubsets(l):
         '''Generate all subsets of a list.
         Accepts list,
         Returns list of lists.
@@ -32,13 +32,13 @@ def maxSubarray(arr):
             return [ [], l ]
         else:
             result = []
-            rest = getSubs(l[1:])
+            rest = getSubsets(l[1:])
             for i in [ [], l[0:1] ]:        # l[0:1] is equivalent to [l[0]]
                 for j in rest:
                     result.append( i + j)
             return result
     
-    subsets = getSubs(arr)
+    subsets = getSubsets(arr)
     # Problem specifies that the empty subset not be considered
     subsets.remove([])
     

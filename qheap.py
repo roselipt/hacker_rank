@@ -19,23 +19,31 @@ def insertHeap(h, element):
         print('now parent', parent(child))
     
 def deleteHeap(h, element):
-    i = h.index(element) + 1    # PLUS ONE for heap 1-index
-    heap_size = len(h)
-    parent = i
-    left = 2 * parent
-    #  As long as left exists
-    while left < heap_size:
-        # Sift left up into parent
-        h[parent-1] = h[left-1]
-        parent = left
-        left = 2 * parent
-    # After loop parent points to last left child
-    if parent == i:
-        # Element to remove had no left child. (While loop was skipped.)
-        h.pop(i-1)
-    else:
-        # Parent points to last left child, now a duplicate value to be removed
-        h.pop(parent-1)
+    i = h.index(element)
+    h[i] = h.pop()
+    print(h[i], 'is the one alright.')
+    heapify(h, i+1)
+    # Following worked by sifting up left children, then popping the last.
+    # Still don't understand if it's wrong as a matter of convention or 
+    # if it violates the heap property in a way I can't see yet.
+
+    #i = h.index(element) + 1    # PLUS ONE for heap 1-index
+    # heap_size = len(h)
+    # parent = i
+    # left = 2 * parent
+    # #  As long as left exists
+    # while left < heap_size:
+    #     # Sift left up into parent
+    #     h[parent-1] = h[left-1]
+    #     parent = left
+    #     left = 2 * parent
+    # # After loop parent points to last left child
+    # if parent == i:
+    #     # Element to remove had no left child. (While loop was skipped.)
+    #     h.pop(i-1)
+    # else:
+    #     # Parent points to last left child, now a duplicate value to be removed
+    #     h.pop(parent-1)
 
 heap = []
 

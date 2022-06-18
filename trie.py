@@ -21,23 +21,32 @@ def entrie(root, s):
     # Convert sting to list and append None, as all entries in trie must end
     entry = list(s) + [None]   # Same as: entry = list(s).append(None)
     for l in entry:
-        # If next level exists, check it.
+        print(l, end = ' ')
+        # If next level already exists, advance p and check it.
         if p.child:
+            p = p.child
+            # Advance p across level until l is found or end is reached.
             while p.info != l and p.sibling:
                 p = p.sibling
             # If letter is found (already present) at this level, advance p down a level.
             if p.info == l:
-                p = p.child
+                #p = p.child
+                print(' {} already in trie, advance p'.format(l, p.info))
             # Letter not found, so add it at this level, and advance p down.
             else:
                 p.sibling = Node(l)
-                p = p.child
+                p = p.sibling
+                #print(' {} added to existing level'.format(l))
                 modified = True
         # Next level does not exist, start it.
         else:
             p.child = Node(l)
             p = p.child
+            print('  {} is first at this level'.format(l))
+            #print('    {} != {}'.format(p.info, l))
+            #print(type(p.info), type(l))
             modified = True
+        print('  ', l, 'processed, modified is', modified)
     # If entry was made, return 1; else -1 (which can only mean s was already in trie).
     if modified == True:
         return 1
@@ -52,16 +61,18 @@ def traverse_trie(trie):
 # Main
 
 # t to hold root of Trie
-t = Node('9')
-test_words = ['ate','at','bat','cat','bat','abcde']
+t = Node(None)
+t.child = Node(None)
+#test_words = ['ate','at','bat','cat','bat','abcde']
+test_words = ['ate', 'at', 'bat', 'bat']
 print(test_words)
-print(t)
-print(t.info)
-print(t.child)
-x = t
-print(x, x.child)
+# print(t)
+# print(t.info)
+# print(t.child)
+# x = t
+# print(x, x.child)
 for word in test_words:
-    print(word, entrie(t, word))
+    print(word, entrie(t, word),"\n")
     
 print("And if my grandmother had wheels, she'd be a wagon.")
     
