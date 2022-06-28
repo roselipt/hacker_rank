@@ -40,9 +40,8 @@ def max_flipping(arr):
 test = [ [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]], \
          [[1,2,3,4], [5,6,7,8], [11,10,9,12], [13,14,15,16]]  \
         ]
-print(test)
-for m in test:
-    print(m)
-    print(m[0][1])
-print(test[0][1][2])
-print('Expecting 53 and 51 got', max_flipping(test))
+for t in test:
+    for row in t:
+        print(row)
+    print()
+print('Expecting 54 and 53 got', max_flipping(test))
